@@ -1,0 +1,140 @@
+<html>
+<head>
+<meta charset="utf8"/>
+
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div id="app">
+
+</div>
+<script>
+try{
+
+
+const candidatos = [
+    {
+         nome: "Adriano Marques",
+         partido:"PTC",
+         numero:36,
+         src:"",
+         votos:0
+     },
+     {
+         nome:"Cachimbão",
+         partido:"PSD",
+         numero:55,
+         src:"",
+         votos:0
+     },
+     {
+         nome:"Netim Morais",
+         partido:"PDT",
+         numero:12,
+         src:"",
+         votos:0
+     },
+     {
+         nome:"Professor Fernando",
+         partido:"REDE",
+         numero:18,
+         src:"",
+         votos:0
+     }
+]
+
+state = {
+   use: function(val){
+      return [val,()=>6]
+   }
+}
+
+
+
+const b = (name,opt,html)=>{
+  if(typeof name === "string"){
+     let x = document.createElement(name)
+     if(opt){
+       if(opt.onClick){
+          x.addEventListener("click",opt.onClick)
+       }
+       for(let i in opt){
+           x.setAttribute(i,opt[i])
+       }
+     }
+     if(typeof html === "string" || typeof html === "number"){
+         x.innerHTML = html
+     }else{
+         x.append.apply(x,html.map(y=>y.e))
+     }
+     return {e:x}
+  }else{
+     return name(opt)
+  }
+ 
+}
+
+Maerli = {
+   render:render,
+   states: [],
+   index: 0,
+   first: true,
+   use:function(val){
+       if(this.first){
+          this.states[this.index] = val
+       }
+      
+       let x =[this.states[this.index], function(_val){
+           this.states[this.index] = _val
+           rerender()
+       }]
+       if(this.first){
+          this.index += 1
+       }
+       return x
+   }
+}
+function Div(props){
+   let tipo = props.tipo
+   return b("div",null,tipo)
+}
+
+
+
+function App(props){
+    let [count,setCount] = Maerli.use(0)
+    let [a,ab] = Maerli.use(1)
+    //let [a,ab] = state(5)
+    let btn = b("button", {onClick:()=> setCount(count + 1)}, "clicar")
+    let c = b("button",{onClick:()=>ab(a+1) }, "a")
+    let span = b("span",null, count+":"+a)
+    return b("div", null, [span,btn,c])
+}
+
+//render(e(App), document.querySelector("#app"))
+
+
+function render(elm,container){
+    rerender = function(){
+    let el = b(App)
+    container.innerHTML = ""
+    container.append(el.e)
+    
+    }
+    
+    rerender()
+    Maerli.first = false
+}
+
+Maerli.render(App, document.querySelector('#app'))
+
+
+}catch(err){
+   alert(err)
+}
+</script>
+</body>
+</html>

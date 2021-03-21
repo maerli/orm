@@ -1,0 +1,35 @@
+*{
+	font-size: 12px;
+}
+.image{
+  /* clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%); */
+}
+table{
+ border-collapse:collapse;
+ width: 100%;
+}
+td,th,tr{
+ padding:10px;
+ border: 1px solid gray;
+}
+.center{
+	padding:5% 20%;
+	text-align: center;
+}
+button{
+	outline: none;
+	padding: 5px 20px;
+	color: blue;
+	border:0;
+	text-decoration: underline;
+	cursor:pointer;
+	font-size: 19px;
+}
+@media print{
+	button{
+		display: none;
+	}
+	.center{
+		padding:2px;
+	}
+}

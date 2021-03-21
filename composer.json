@@ -1,0 +1,13 @@
+{
+    "require": {
+        "php-activerecord/php-activerecord": "^1.2",
+        "dompdf/dompdf": "dev-master",
+	"clegginabox/pdf-merger": "dev-master"
+
+    },
+		"autoload": {
+			"psr-4":{
+				"App\\":"App/"
+			}
+		}
+}

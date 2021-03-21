@@ -1,0 +1,65 @@
+$ = id=>document.querySelector(id)
+var values = {};
+msg = str=>alert(msg)
+var elements = {
+	'protocolo':
+	{
+		on : function (elm) {
+			console.log(elm.value);
+		},
+		off: function (elm) {
+			values[elm.id] = elm.value
+		}
+	},
+	'origem':
+	{
+		on : function (elm) {
+			console.log(elm.value)
+		},
+		off : function (elm) {
+			let value = elm.value;
+			if(value !== '-- Selecionar --'){
+			  values[elm.id] = elm.value;
+			}else{
+			  msg('selecione um valor');
+			  return false;
+			}
+		}
+	},
+	'observacao':
+	{
+		on : function (elm) {
+			
+		},
+		off : function () {
+			values[elm.id] = elm.value;
+		}
+	},
+	'enviar':
+	{
+		on : 	function (elm) {
+			elm.addEventListener('click',fireAfter)
+		}
+	}
+}
+
+function fireAfter(event){
+	event.preventDefault();
+	for(let id in elements){
+		let elm = $('#'+id);
+		if(elm){
+			if( elements[id].off){
+				if(elements[id].off(elm) === false){
+					break;
+				}
+			}
+		}
+	}
+}
+
+for(let id in elements){
+	let elm = $('#'+id);
+	if(elm){
+		elements[id].on(elm);
+	}
+}

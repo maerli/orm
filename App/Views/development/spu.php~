@@ -1,0 +1,5 @@
+<form onsubmit="event.preventDefault(); mostrarConteudo(); ">
+	<input type="text" id="protocolo"/> 
+	<button type="submit"> Consultar </button>
+</form>
+<script src="consulta.js"></script>

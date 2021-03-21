@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<title> protocolo</title>
+    <meta charset="utf8">
+	 
+    <style>
+				.image{
+					width:100px;
+					height:100px;
+					background-color: blue;
+					clip-path: polygon(50% 0%, 90% 20%, 35% 56%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+				
+				}
+				table{
+					border-collapse:collapse;
+					width: 100%;		
+				}
+				td,th,tr{
+					padding:10px;
+					border: 1px solid gray;				
+				}
+				body{
+					display: flex;
+					flex-direction: column;				
+				}
+				.center{
+					text-align: center;				
+				}
+				
+    </style>
+</head>
+<body>
+			<!--
+        <footer>SPU/VIPROC
+00189-0001/2021
+ASSUNTO
+FÉRIAS
+
+            Rua Coronel Duca, s/n - Centro - Bela Cruz - CEP: 62.570-000<br>
+            CNPJ:30.762.050/0001-77 E-mail: sme.belacruz@gmail.com. Fone: (88) 366312040/1150
+        </footer> -->
+        <img src='/spu/sistema/painel/img/login.png' width=260px><br><br> 
+        <div class="image"> </div>
+        <table>
+                <tr>
+                    <th> <strong>ORIGEM/Unidade do Órgão</strong> <br/> <?php echo $args['origem']; ?> </th><!-- Origem -->
+                    <th> <strong>SPU/VIPROC </strong> <br/> <?php echo $args['protocolo']; ?> </th><!-- SPU/VIPROC  -->
+                </tr>
+                <tr>
+                   	<th> <strong> ASSUNTO </strong> <br/> <?php echo $args['assunto'] ?> </th><!-- Assunto -->
+                    <th> <strong> OBSERVAÇÕES </strong> <br/> <?php echo $args['observacao']; ?> </th><!-- Observação  -->
+                </tr>
+                <tr class="row">
+                	<th> <strong> AUTOR(es)/Órgão Central </strong> <br/> <?php echo $args['autor']; ?> </th><!-- Autores -->
+                  <th> <strong> FAVORECIDO(S)/ITERESSADO </strong> <br/> <?php echo $args['interessado'] ?> </th><!-- FAVORECIDO(S)/ITERESSADO  -->
+                </tr>
+
+        </table>
+			<hr>
+        
+        		<table >
+            <tr> <td colspan="4" class="center"> TRAMITAÇÃO DO PROCESSO </td> </tr>
+
+            <tr>   
+              <th  > DE </th> <th > PARA</th> <th >DATA</th> <th > RESP. P/ TRÂMITE </th>
+            </tr>
+            
+            <tbody>
+                <?php foreach ($args['history'] as $key => $protocolo) : ?>
+									<tr>
+										<?php
+											$response = [
+												$protocolo['origem'],
+												$protocolo['destino'],
+												$protocolo['data'],
+												$protocolo['nome'].' '.$protocolo['sobrenome']
+											];
+											
+										?>
+										<?php foreach ($response as $key1 => $data): ?>
+											<td><?php echo gettype($data); ?></td>
+										<?php endforeach; ?>
+									</tr>
+								<?php endforeach; ?>
+            </tbody>
+            </table>
+            <script type="text/javascript" >
+            	document.write("oii");
+            </script>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+function $(id){
+	return document.querySelector(id);
+}
+
+//var hash = location.hash.slice(1);
+//if(hash != ''){
+//    $('#protocolo').value = hash;
+//    mostrarConteudo();
+//}
+
+function mostrarConteudo(){
+ var protocolo = $('#protocolo').value;
+ consulta(protocolo);
+}
+
+function e(name,options,childrens){
+	if (typeof name === "string") {
+		var elm = document.createElement(name);
+		for (attr in options) {
+			elm.setAttribute(attr, options[attr]);
+		}	
+		if(typeof childrens === "string"){
+			elm.innerHTML = childrens;
+		}else{
+			if ( childrens instanceof Array) {
+				elm.append.apply(elm,childrens) // só funciona se name for striung
+			}		
+		}
+		return elm;
+	}else{
+		return name();	
+	}
+}
+
+
+async function consulta(protocolo){
+	
+	var req = await fetch('/orm/history/api?p='+protocolo)	
+	var history = await req.json();
+	var div = e('div', null, history.map(a=>{		
+		
+		var real = e('div', null, Object.keys(a).map(value=>{
+			return e('div',null, value);
+		}));		
+		
+		return e('div',null,[real]);
+	}))
+	console.log(div)
+	$('#conteudo').innerHTML = div.outerHTML;
+}
+
+
+
+
+
+
+
+
+
+
+
